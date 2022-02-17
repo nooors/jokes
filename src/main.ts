@@ -40,15 +40,15 @@ function getJoke(): void {
     }
 }
 
-(() => {
+// (() => {
     
-    fetch(apiWeather)
-        .then((res) => res.json())
-        .then((data) => {
-            console.log('weather')
-            console.log(data);
-            // showJoke.innerHTML = `${data.joke}`
-        })
-})();
+//     fetch(apiWeather)
+//         .then((res) => res.json())
+//         .then((data) => {
+//             console.log('weather')
+//             console.log(data);
+//             // showJoke.innerHTML = `${data.joke}`
+//         })
+// })();
 
 

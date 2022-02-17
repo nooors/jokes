@@ -4,23 +4,45 @@ html, body
     box-sizing: border-box
 
 body
-    height: 100vh
- 
+    height: 100vh;
 
 .container
     height: 100%
     width: 100%
     display: flex
     justify-content: center
-    align-items: center
-    flex-flow: row wrap
-    flex-basis: 1
+    gap
+.col
+    display: flex
+    &.col1
+        display: flex
+        justify-content: end
+        align-items: end
+        margin-bottom: 5rem
+        img
+            width: 50%
 
-.cola
-    border: 1px solid black
+    &.col2
+        display: flex
+        img
+            position: relative
+        .actions
+            position: absolute
+            top: 50%
+            left: 50%
+            transform: translate(-50%, -50%)
+
+        button
+            padding: .5rem 1rem
+            border-radius: .75rem
+            background: hsl(46, 81%, 62%)
+            
+    &.col3
+        display: flex
+        justify-content: start
+        align-items: start
+        margin-top: 5rem
+        img
+            width: 50%
 
 
-.display
-    width: 70%
-    height: 100px
-    margin-bottom: 10px
