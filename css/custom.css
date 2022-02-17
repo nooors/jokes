@@ -7,6 +7,7 @@ html, body {
 
 body {
   height: 100vh;
+  font-family: sans-serif;
 }
 
 .container {
@@ -27,6 +28,7 @@ body {
 }
 
 .col.col1 {
+  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -43,28 +45,103 @@ body {
   width: 50%;
 }
 
-.col.col2 {
+.col.col1 .weather {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  direction: row-reverse;
 }
 
-.col.col2 img {
-  position: relative;
+.col.col1 .weather img {
+  width: 35%;
 }
 
-.col.col2 .actions {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+.col.col1 .weather .temp {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
 }
 
-.col.col2 button {
-  padding: .5rem 1rem;
+.col.col2 {
+  width: 40rem;
+  background-image: url("../assets/img/blob1.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.col.col2 .col2__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 50rem;
+}
+
+.col.col2 .col2__container .presentation p {
+  color: white;
+  font-size: 1.5rem;
+}
+
+.col.col2 .col2__container .joke_display {
+  width: 58%;
+  color: white;
+  line-height: 1.25rem;
+}
+
+.col.col2 .col2__container .actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.col.col2 .col2__container .actions img {
+  width: 5%;
+  padding: 1rem;
+}
+
+.col.col2 .col2__container .actions:hover {
+  cursor: pointer;
+}
+
+.col.col2 .col2__container .next {
+  width: 12rem;
+  background-color: #ffd83d;
+  border: 1px black solid;
+  padding: 0.5rem 0;
   border-radius: .75rem;
-  background: #edc850;
+}
+
+.col.col2 .col2__container .next:hover {
+  cursor: pointer;
 }
 
 .col.col3 {

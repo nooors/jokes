@@ -1,8 +1,27 @@
 export { };
+
+class UserClass{
+    joke: string;
+    score: number;
+    date: string;
     
+    constructor(joke: string, score: number) {
+        this.joke = joke;
+        this.score = score;
+        this.date = (new Date()).toISOString();
+    }
+}
+
+let userArray: {
+    joke: string,
+    score: number,
+    date: string
+}[]=[];
+
+
 const apiJokes: string = 'https://icanhazdadjoke.com/';
 const apiNorris: string = 'https://api.chucknorris.io/jokes/random';
-const apiWeather: string = 'api.openweathermap.org/data/2.5/weather?lat=413&lon=21&appid=d21cf593dc1a1c4dd916088038d78729'; 
+const apiWeather: string = 'https://api.openweathermap.org/data/2.5/weather?lat=41.3879&lon=2.16992&units=metric&appid=d21cf593dc1a1c4dd916088038d78729'; 
 const init: object = {
     headers: {
         Accept: 'application/json'
@@ -10,8 +29,37 @@ const init: object = {
 }
 
 const showJoke = document.getElementById("joke") as HTMLElement;
-const buttonJoke = document.querySelector<HTMLElement>(".btn");
+const buttonJoke = document.querySelector<HTMLElement>(".next");
 
+const badJoke = document.getElementById("bad") as HTMLElement;
+const notBad = document.getElementById("not-bad") as HTMLElement;
+const niceJoke = document.getElementById("nice") as HTMLElement;
+
+badJoke?.addEventListener('click', () => { 
+    console.log(typeof showJoke.innerHTML)
+    if (showJoke.textContent) {
+        let opinion: UserClass = new UserClass(showJoke.textContent, 1);
+        userArray.push(opinion);
+        console.log(userArray);
+        getJoke();
+    }
+});
+notBad?.addEventListener('click', () => {
+    if (showJoke.textContent) {
+        let opinion: UserClass = new UserClass(showJoke.textContent, 2);
+        userArray.push(opinion);
+        console.log(userArray);
+        getJoke();
+    }
+})
+niceJoke?.addEventListener('click', () => {
+    if (showJoke.textContent) {
+        let opinion: UserClass = new UserClass(showJoke.textContent, 3);
+        userArray.push(opinion);
+        console.log(userArray);
+        getJoke();
+    }
+})
 
 buttonJoke?.addEventListener('click', getJoke);
 
@@ -22,7 +70,7 @@ function getJoke(): void {
             fetch(apiNorris, init)
                 .then((res) => res.json())
                 .then((data) => {
-                    console.log(data.joke);
+                    console.log(data.value);
                     showJoke.innerHTML = `${data.value}`
                 })
         })();
@@ -31,7 +79,7 @@ function getJoke(): void {
             fetch(apiJokes, init)
                 .then((res) => res.json())
                 .then((data) => {
-                    console.log(data.joke);
+                    
                     showJoke.innerHTML = `${data.joke}`
                 });
         
@@ -40,15 +88,29 @@ function getJoke(): void {
     }
 }
 
-// (() => {
+(() => {
     
-//     fetch(apiWeather)
-//         .then((res) => res.json())
-//         .then((data) => {
-//             console.log('weather')
-//             console.log(data);
-//             // showJoke.innerHTML = `${data.joke}`
-//         })
-// })();
+    fetch(apiWeather)
+        .then((res) => res.json())
+        .then((data) => {
+            let result = data;
+            //The div where will append the dynamic image
+            let weatherImg = document.getElementById('weather') as HTMLElement;
+            if (weatherImg) {
+                console.log(weatherImg)
+            }
+            let weatherIcon = new Image();
+            weatherIcon.src = `https://openweathermap.org/img/wn/${result.weather[0].icon}@2x.png`;
+            weatherImg.appendChild(weatherIcon);
+            let weatherTemp = document.getElementById('temp') as HTMLElement;
+            // if guard prevent @weatherTemp is null
+            if (weatherTemp) {
+                weatherTemp.innerHTML = `${result.main.temp.toFixed(1).toString()}\u00B0C   |`;
+            }
+        })
+        .catch((e) =>{
+        console.log(e);
+    })
+})();
 
 

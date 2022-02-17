@@ -7,19 +7,33 @@
     <title>Document</title>
     <link rel="stylesheet" href="./css/custom.css">
     <script>var exports = {};</script>
+    <script src="./dist/main.js" defer></script>
 
 </head>
 
 <body>
     <div class="container">
         <div class="col col1">
+            <div class="weather" id="weather">
+
+                <div class="temp" id="temp"></div>
+            </div>
             <img src="./assets/img/blob2.svg" alt="img-decor">
         </div>
         <div class="col col2">
-            <img src="./assets/img/blob1.svg" alt="img-decor">
-            <div class="actions">
+            <div class="col2__container">
+                <div class="presentation">
+                    <p>Preparat per riure?</p>
+                </div>
+                <div class="joke_display" id="joke">
 
-                <button>Següent acudit</button>
+                </div>
+                <div class="actions">
+                    <img src="./assets/img/sad.png" alt="bad joke" id="bad" value="1">
+                    <img src="./assets/img/confused.png" alt="not bad joke" id="not-bad" value="2">
+                    <img src="./assets/img/laughing.png" alt="nice joke" id="nice" value="3">
+                </div>
+                <button class="next">Següent acudit</button>
             </div>
 
         </div>
@@ -30,7 +44,6 @@
     </div>
 
 
-    <script src="./dist/main.js"></script>
 </body>
 
 </html>
