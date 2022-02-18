@@ -49,6 +49,7 @@ body {
   position: absolute;
   top: 2rem;
   left: 2rem;
+  width: 7rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -59,7 +60,7 @@ body {
 }
 
 .col.col1 .weather img {
-  width: 35%;
+  width: 80%;
 }
 
 .col.col1 .weather .temp {
@@ -69,7 +70,9 @@ body {
 }
 
 .col.col2 {
-  width: 40rem;
+  -webkit-box-flex: 2;
+      -ms-flex-positive: 2;
+          flex-grow: 2;
   background-image: url("../assets/img/blob1.svg");
   background-position: center;
   background-repeat: no-repeat;

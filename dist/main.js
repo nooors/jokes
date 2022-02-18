@@ -22,7 +22,7 @@ const badJoke = document.getElementById("bad");
 const notBad = document.getElementById("not-bad");
 const niceJoke = document.getElementById("nice");
 badJoke === null || badJoke === void 0 ? void 0 : badJoke.addEventListener('click', () => {
-    console.log(typeof showJoke.innerHTML);
+    // if guard for ensure the type of element since it can be null
     if (showJoke.textContent) {
         let opinion = new UserClass(showJoke.textContent, 1);
         userArray.push(opinion);
@@ -47,6 +47,7 @@ niceJoke === null || niceJoke === void 0 ? void 0 : niceJoke.addEventListener('c
     }
 });
 buttonJoke === null || buttonJoke === void 0 ? void 0 : buttonJoke.addEventListener('click', getJoke);
+// rondomly fecthing two apis 
 function getJoke() {
     let jokeType = Math.floor(Math.random() * 2 + 1);
     switch (jokeType) {
@@ -55,7 +56,6 @@ function getJoke() {
                 fetch(apiNorris, init)
                     .then((res) => res.json())
                     .then((data) => {
-                    console.log(data.value);
                     showJoke.innerHTML = `${data.value}`;
                 });
             })();
@@ -76,18 +76,17 @@ function getJoke() {
         .then((res) => res.json())
         .then((data) => {
         let result = data;
-        //The div where will append the dynamic image
-        let weatherImg = document.getElementById('weather');
+        //The div from which will append the dynamic image
+        let weatherImg = document.getElementById('weather-icon');
         if (weatherImg) {
-            console.log(weatherImg);
+            let weatherIcon = new Image();
+            weatherIcon.src = `https://openweathermap.org/img/wn/${result.weather[0].icon}@2x.png`;
+            weatherImg.appendChild(weatherIcon);
         }
-        let weatherIcon = new Image();
-        weatherIcon.src = `https://openweathermap.org/img/wn/${result.weather[0].icon}@2x.png`;
-        weatherImg.appendChild(weatherIcon);
         let weatherTemp = document.getElementById('temp');
         // if guard prevent @weatherTemp is null
         if (weatherTemp) {
-            weatherTemp.innerHTML = `${result.main.temp.toFixed(1).toString()}\u00B0C   |`;
+            weatherTemp.innerHTML = `${result.main.temp.toFixed(1).toString()}\u00B0C`;
         }
     })
         .catch((e) => {

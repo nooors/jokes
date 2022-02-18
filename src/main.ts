@@ -18,7 +18,6 @@ let userArray: {
     date: string
 }[]=[];
 
-
 const apiJokes: string = 'https://icanhazdadjoke.com/';
 const apiNorris: string = 'https://api.chucknorris.io/jokes/random';
 const apiWeather: string = 'https://api.openweathermap.org/data/2.5/weather?lat=41.3879&lon=2.16992&units=metric&appid=d21cf593dc1a1c4dd916088038d78729'; 
@@ -36,7 +35,7 @@ const notBad = document.getElementById("not-bad") as HTMLElement;
 const niceJoke = document.getElementById("nice") as HTMLElement;
 
 badJoke?.addEventListener('click', () => { 
-    console.log(typeof showJoke.innerHTML)
+    // if guard for ensure the type of element since it can be null
     if (showJoke.textContent) {
         let opinion: UserClass = new UserClass(showJoke.textContent, 1);
         userArray.push(opinion);
@@ -62,7 +61,7 @@ niceJoke?.addEventListener('click', () => {
 })
 
 buttonJoke?.addEventListener('click', getJoke);
-
+// rondomly fecthing two apis 
 function getJoke(): void {
     let jokeType = Math.floor(Math.random() * 2 + 1);
     switch (jokeType) {
@@ -70,7 +69,6 @@ function getJoke(): void {
             fetch(apiNorris, init)
                 .then((res) => res.json())
                 .then((data) => {
-                    console.log(data.value);
                     showJoke.innerHTML = `${data.value}`
                 })
         })();
@@ -82,30 +80,27 @@ function getJoke(): void {
                     
                     showJoke.innerHTML = `${data.joke}`
                 });
-        
         })();
             break;
     }
 }
 
-(() => {
-    
+(() => { 
     fetch(apiWeather)
         .then((res) => res.json())
         .then((data) => {
             let result = data;
-            //The div where will append the dynamic image
-            let weatherImg = document.getElementById('weather') as HTMLElement;
+            //The div from which will append the dynamic image
+            let weatherImg = document.getElementById('weather-icon') as HTMLElement;
             if (weatherImg) {
-                console.log(weatherImg)
+                let weatherIcon = new Image();
+                weatherIcon.src = `https://openweathermap.org/img/wn/${result.weather[0].icon}@2x.png`;
+                weatherImg.appendChild(weatherIcon);               
             }
-            let weatherIcon = new Image();
-            weatherIcon.src = `https://openweathermap.org/img/wn/${result.weather[0].icon}@2x.png`;
-            weatherImg.appendChild(weatherIcon);
             let weatherTemp = document.getElementById('temp') as HTMLElement;
             // if guard prevent @weatherTemp is null
             if (weatherTemp) {
-                weatherTemp.innerHTML = `${result.main.temp.toFixed(1).toString()}\u00B0C   |`;
+                weatherTemp.innerHTML = `${result.main.temp.toFixed(1).toString()}\u00B0C`;
             }
         })
         .catch((e) =>{
